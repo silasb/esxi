@@ -17,6 +17,7 @@ func init() {
 	vimCmdCmd.AddCommand(getConfigCmd)
 	vimCmdCmd.AddCommand(unregisterCmd)
 	vimCmdCmd.AddCommand(destroyCmd)
+	vimCmdCmd.AddCommand(getAllVmsCmd)
 }
 
 var powerGetStateCmd = &cobra.Command{
@@ -111,6 +112,16 @@ var destroyCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		vmid := args[0]
 		output := client.Client("vim-cmd vmsvc/destroy " + vmid)
+		fmt.Println(output.String())
+	},
+}
+
+var getAllVmsCmd = &cobra.Command{
+	Use:   "vmsvc/getallvms",
+	Short: "",
+	Long:  "",
+	Run: func(cmd *cobra.Command, args []string) {
+		output := client.Client("vim-cmd vmsvc/getallvms")
 		fmt.Println(output.String())
 	},
 }
